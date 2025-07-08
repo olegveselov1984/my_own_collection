@@ -11,6 +11,7 @@
 7. Запустите настройку окружения `. hacking/env-setup`.
 8. Если все шаги прошли успешно — выйдите из виртуального окружения `deactivate`.
 9. Ваше окружение настроено. Чтобы запустить его, нужно находиться в директории `ansible` и выполнить конструкцию `. venv/bin/activate && . hacking/env-setup`.
+![image](https://github.com/user-attachments/assets/cffc8a7e-e694-402d-94e8-18535c91afb6)
 
 ## Основная часть
 
