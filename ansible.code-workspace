@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "my_own_collection",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
