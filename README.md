@@ -162,6 +162,100 @@ if __name__ == '__main__':
 **Шаг 3.** Заполните файл в соответствии с требованиями Ansible так, чтобы он выполнял основную задачу: module должен создавать текстовый файл на удалённом хосте по пути, определённом в параметре `path`, с содержимым, определённым в параметре `content`.
 
 **Шаг 4.** Проверьте module на исполняемость локально.
+Файл создается 
+Тело скрипта my_own_module.py:
+
+#!/usr/bin/python
+
+from __future__ import (absolute_import, division, print_function)
+
+__metaclass__ = type
+
+import os.path
+
+DOCUMENTATION = r'''
+---
+module: file_creator
+
+short_description: Создание текстового файла
+
+version_added: "1.0.0"
+
+description: Создание текстового файла, путь и содержимое.
+
+options:
+    path:
+        description: Полный путь к файлу включая имя и расширение
+        required: true
+        type: str
+    content:
+        description: Текстовое содержимое файла
+        required: true
+        type: str
+
+extends_documentation_fragment:
+    - HW01.HW01_1.file_name
+
+author:
+    - olegveselov1984 (@olegveselov1984)
+'''
+
+EXAMPLES = r'''
+- name: Test
+  HW01.HW01_1.file_name:
+    path: /tmp/filename.txt
+    content: test
+'''
+
+RETURN = r'''
+#{"file_created": true, "invocation": {"module_args": {"path": "/tmp/filename.txt", "content": "test"}}}
+'''
+
+from ansible.module_utils.basic import AnsibleModule
+
+def file_create_module():
+
+    module_args = dict(
+        path = dict( type = 'str', required = True ),
+        content = dict( type = 'str', required = True )
+    )
+    result = dict(
+        file_created=True
+    )
+    module = AnsibleModule(
+        argument_spec=module_args,
+        supports_check_mode=True
+    )
+    if module.check_mode:
+        module.exit_json(**result)
+    try:
+        file_out = open( module.params['path'], "w", encoding="utf-8" )
+        file_out.write( module.params['content'] )
+        file_out.close
+    except:
+        result['file_created'] = False
+        module.fail_json( msg='File creation error!', **result )
+    module.exit_json(**result)
+
+
+def main():
+    file_create_module()
+
+if __name__ == '__main__':
+    main()
+
+Тело скрипта file.json:
+
+{
+    "ANSIBLE_MODULE_ARGS": {
+        "path": "/tmp/test.txt",
+        "content": "test"
+    }
+}
+
+![image](https://github.com/user-attachments/assets/84e4305a-22b4-4e70-b6c6-18a7e9d3ef1e)
+
+
 
 **Шаг 5.** Напишите single task playbook и используйте module в нём.
 
