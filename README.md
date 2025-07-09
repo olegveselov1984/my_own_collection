@@ -261,7 +261,27 @@ if __name__ == '__main__':
 
 **Шаг 5.** Напишите single task playbook и используйте module в нём.
 
+single_task_playbook.yml
+
+![image](https://github.com/user-attachments/assets/2e4d6465-bd63-46e4-ab95-eb859d3ffac5)
+
+
+---
+- name: Test my_own_module
+  hosts: localhost
+  tasks:
+  - name: Execute module
+    my_own_module:
+      path: "/tmp/test02.txt"
+      content: "Test02"
+
+
+
+
 **Шаг 6.** Проверьте через playbook на идемпотентность.
+
+![image](https://github.com/user-attachments/assets/83d702ea-0b9a-4cb2-87ca-6000083d0509)
+
 
 **Шаг 7.** Выйдите из виртуального окружения.
 
