@@ -288,7 +288,17 @@ single_task_playbook.yml
 
 **Шаг 8.** Инициализируйте новую collection: `ansible-galaxy collection init my_own_namespace.yandex_cloud_elk`.
 
+
+![image](https://github.com/user-attachments/assets/a7fc5a52-dddd-4343-bfa2-0a9edaaa1bb4)
+
+
 **Шаг 9.** В эту collection перенесите свой module в соответствующую директорию.
+
+cp ./lib/ansible/modules/my_own_module.py ./my_own_namespace/yandex_cloud_elk/plugins/modules/
+
+![image](https://github.com/user-attachments/assets/4e721634-3ae6-488d-b31b-0878220dfa8f)
+
+
 
 **Шаг 10.** Single task playbook преобразуйте в single task role и перенесите в collection. У role должны быть default всех параметров module.
 
