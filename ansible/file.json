@@ -1,6 +1,6 @@
 {
     "ANSIBLE_MODULE_ARGS": {
-        "path": "/tmp/test.txt",
-        "content": "test"
+        "path": "/tmp/test2.txt",
+        "content": "test2"
     }
 }
