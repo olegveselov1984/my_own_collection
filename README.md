@@ -280,7 +280,8 @@ single_task_playbook.yml
 
 **Шаг 6.** Проверьте через playbook на идемпотентность.
 
-![image](https://github.com/user-attachments/assets/83d702ea-0b9a-4cb2-87ca-6000083d0509)
+![image](https://github.com/user-attachments/assets/828a66d7-1a65-4b24-bc40-4581d8a4231b)
+
 
 
 **Шаг 7.** Выйдите из виртуального окружения.
