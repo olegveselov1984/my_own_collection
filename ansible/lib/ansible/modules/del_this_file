@@ -3,7 +3,10 @@
 # Copyright: (c) 2018, Terry Jones <terry.jones@example.org>
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 from __future__ import (absolute_import, division, print_function)
+
 __metaclass__ = type
+
+import os.path
 
 DOCUMENTATION = r'''
 ---
@@ -18,55 +21,43 @@ version_added: "1.0.0"
 description: This is my longer description explaining my test module.
 
 options:
-    name:
-        description: This is the message to send to the test module.
+    path:
+        description: The path for the location of the file being created.
         required: true
         type: str
-    new:
-        description:
-            - Control to demo if the result of this module is changed or not.
-            - Parameter description can be a list as well.
-        required: false
-        type: bool
+    content:
+        description: The content that should be written to the file being created.
+        required: true
+        type: str
 # Specify this value according to your collection
 # in format of namespace.collection.doc_fragment_name
 extends_documentation_fragment:
     - my_namespace.my_collection.my_doc_fragment_name
 
 author:
-    - Your Name (@yourGitHubHandle)
+    - Valdem88 (@Valdem88)
 '''
 
 EXAMPLES = r'''
 # Pass in a message
-- name: Test with a message
+- name: Creating a file with content
   my_namespace.my_collection.my_test:
-    name: hello world
-
-# pass in a message and have changed true
-- name: Test with a message and changed output
-  my_namespace.my_collection.my_test:
-    name: hello world
-    new: true
-
-# fail the module
-- name: Test failure of the module
-  my_namespace.my_collection.my_test:
-    name: fail me
+    path: '/tmp/file.txt'
+    content: 'some content'
 '''
 
 RETURN = r'''
 # These are examples of possible return values, and in general should use other names for return values.
 original_message:
-    description: The original name param that was passed in.
+    description: The original Content which was passed in.
     type: str
     returned: always
-    sample: 'hello world'
+    sample: 'some content'
 message:
-    description: The output message that the test module generates.
+    description: The output message that the module generates.
     type: str
     returned: always
-    sample: 'goodbye'
+    sample: 'file was written'
 '''
 
 from ansible.module_utils.basic import AnsibleModule
@@ -75,8 +66,8 @@ from ansible.module_utils.basic import AnsibleModule
 def run_module():
     # define available arguments/parameters a user can pass to the module
     module_args = dict(
-        name=dict(type='str', required=True),
-        new=dict(type='bool', required=False, default=False)
+        path=dict(type='str', required=True),
+        content=dict(type='str', required=True)
     )
 
     # seed the result dict in the object
@@ -105,21 +96,19 @@ def run_module():
     if module.check_mode:
         module.exit_json(**result)
 
+    if os.path.exists(module.params['path']):
+        result['changed'] = False
+        result['message'] = 'File already exist'
+    else:
+        target_file = open(module.params['path'], "w")
+        target_file.write(module.params['content'])
+        target_file.close()
+        result['changed'] = True
+        result['message'] = 'File was created!'
+
     # manipulate or modify the state as needed (this is going to be the
     # part where your module will do what it needs to do)
-    result['original_message'] = module.params['name']
-    result['message'] = 'goodbye'
-
-    # use whatever logic you need to determine whether or not this module
-    # made any modifications to your target
-    if module.params['new']:
-        result['changed'] = True
-
-    # during the execution of the module, if there is an exception or a
-    # conditional state that effectively causes a failure, run
-    # AnsibleModule.fail_json() to pass in the message and the result
-    if module.params['name'] == 'fail me':
-        module.fail_json(msg='You requested this to fail', **result)
+    result['original_message'] = module.params['content']
 
     # in the event of a successful module execution, you will want to
     # simple AnsibleModule.exit_json(), passing the key/value results
