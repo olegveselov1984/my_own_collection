@@ -1,5 +1,0 @@
----
-- name: Execute module
-  my_own_module:
-    path: "{{ test_path }}"
-    content: "{{ test_content }}"

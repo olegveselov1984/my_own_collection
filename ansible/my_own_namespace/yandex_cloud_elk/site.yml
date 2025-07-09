@@ -1,6 +1,0 @@
----
-- name: Test in yandex.cloud
-  hosts:
-    - ubuntu-ansible
-  roles:
-    - my_role
