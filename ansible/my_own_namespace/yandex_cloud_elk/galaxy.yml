@@ -17,12 +17,12 @@ readme: README.md
 # A list of the collection's content authors. Can be just the name or in the format 'Full Name <email> (url)
 # @nicks:irc/im.site#channel'
 authors:
-- your name <example@domain.com>
+- Oleg
 
 
 ### OPTIONAL but strongly recommended
 # A short summary description of the collection
-description: your collection description
+description: Создает файл по заданному пути с заданным текстом. путь и текст в файле:./roles/my_role/defaults/main.yml
 
 # Either a single license or a list of licenses for content inside of a collection. Ansible Galaxy currently only
 # accepts L(SPDX,https://spdx.org/licenses/) licenses. This key is mutually exclusive with 'license_file'
@@ -44,16 +44,17 @@ tags: []
 dependencies: {}
 
 # The URL of the originating SCM repository
-repository: http://example.com/repository
+repository: https://github.com/olegveselov1984/my_own_collection
 
 # The URL to any online docs
-documentation: http://docs.example.com
+documentation: https://github.com/olegveselov1984/my_own_collection/blob/main/ansible/my_own_namespace/yandex_cloud_elk/galaxy.yml
+
 
 # The URL to the homepage of the collection/project
-homepage: http://example.com
+#homepage: http://example.com
 
 # The URL to the collection issue tracker
-issues: http://example.com/issue/tracker
+#issues: http://example.com/issue/tracker
 
 # A list of file glob-like patterns used to filter any files or directories that should not be included in the build
 # artifact. A pattern is matched from the relative path of the file or directory of the collection directory. This
