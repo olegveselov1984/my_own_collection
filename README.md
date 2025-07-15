@@ -296,6 +296,29 @@ single_task_playbook.yml
 
 cp ./lib/ansible/modules/my_own_module.py ./my_own_namespace/yandex_cloud_elk/plugins/modules/
 
+__________________________________________________
+Для справки:
+Вячеслав, здравствуйте, в вашем playbook нет синтаксических ошибок. Ansible сообщает вам, что не может найти модуль my_own_module
+
+вам нужно расположить модуль в правильной директории
+[docs.ansible.com...g-a-module](https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_general.html#creating-a-module)
+[habr.com...og/646147/](https://habr.com/ru/company/southbridge/blog/646147/)
+
+ЮБ
+Юлия Блех
+Ответ студента
+у меня также) в видеолекции этот момент фигурировал и было определенно сказано, что модуль располагаем в директории plugins/modules. Там и размещен.
+
+МТ
+Максим Томаев
+Ответ студента
+Один из вариантов решения вашей проблемы:
+Посмотрите в ansible --version значение переменной configured module search path.
+Если директории нет по тому пути, который отобразится в переменной, создайте ее и положите туда
+ваш модуль.
+___________________________________________________________________
+
+
 ![image](https://github.com/user-attachments/assets/4e721634-3ae6-488d-b31b-0878220dfa8f)
 
 
