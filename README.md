@@ -302,6 +302,8 @@ __________________________________________________
 
 вам нужно расположить модуль в правильной директории
 [docs.ansible.com...g-a-module](https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_general.html#creating-a-module)
+
+
 [habr.com...og/646147/](https://habr.com/ru/company/southbridge/blog/646147/)
 
 ЮБ
